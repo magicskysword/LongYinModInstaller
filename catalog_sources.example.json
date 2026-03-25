@@ -2,21 +2,33 @@
   "sources": [
     {
       "name": "GitHub Raw",
-      "catalog_url": "https://raw.githubusercontent.com/<你的用户名>/<你的仓库名>/main/mod_repository/mods.json",
-      "enabled": false
+      "catalog_url": "https://raw.githubusercontent.com/magicskysword/LongYinModInstaller/master/mod_repository/mods.json",
+      "enabled": true
     },
     {
       "name": "jsDelivr 镜像",
-      "catalog_url": "https://cdn.jsdelivr.net/gh/<你的用户名>/<你的仓库名>@main/mod_repository/mods.json",
-      "enabled": false
+      "catalog_url": "https://cdn.jsdelivr.net/gh/magicskysword/LongYinModInstaller@master/mod_repository/mods.json",
+      "enabled": true
     }
   ],
   "release_sources": [
     {
-      "name": "GitHub 镜像",
-      "api_base": "<填写镜像 API 基址>",
-      "download_base": "<填写镜像下载基址>",
-      "enabled": false
+      "name": "GitHub 镜像 gh-proxy",
+      "api_base": "https://gh-proxy.com/https://api.github.com",
+      "download_base": "https://gh-proxy.com/https://github.com",
+      "enabled": true
+    },
+    {
+      "name": "GitHub 镜像 gh-proxy v6",
+      "api_base": "https://v6.gh-proxy.org/https://api.github.com",
+      "download_base": "https://v6.gh-proxy.org/https://github.com",
+      "enabled": true
+    },
+    {
+      "name": "GitHub 镜像 mirror.ghproxy",
+      "api_base": "https://mirror.ghproxy.com/https://api.github.com",
+      "download_base": "https://mirror.ghproxy.com/https://github.com",
+      "enabled": true
     },
     {
       "name": "GitHub 原址",

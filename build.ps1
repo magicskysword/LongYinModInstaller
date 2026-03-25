@@ -21,6 +21,16 @@ if ($Clean) {
 Push-Location $root
 try {
     & $python -m PyInstaller .\LongYinModInstaller.spec --noconfirm --clean
+
+    $distDir = Join-Path $root "dist"
+    Copy-Item (Join-Path $root "catalog_sources.example.json") (Join-Path $distDir "catalog_sources.example.json") -Force
+    Copy-Item (Join-Path $root "catalog_sources.example.json") (Join-Path $distDir "catalog_sources.json") -Force
+
+    $targetRepoDir = Join-Path $distDir "mod_repository"
+    if (Test-Path $targetRepoDir) {
+        Remove-Item -Recurse -Force $targetRepoDir
+    }
+    Copy-Item (Join-Path $root "mod_repository") $targetRepoDir -Recurse -Force
 }
 finally {
     Pop-Location

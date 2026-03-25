@@ -8,14 +8,24 @@ from pathlib import Path, PurePosixPath
 from ..constants import LOCAL_CATALOG_RELATIVE_PATH, USER_CONFIG_DIR_NAME
 
 
+def is_frozen_app() -> bool:
+    return bool(getattr(sys, "frozen", False))
+
+
 def get_application_root() -> Path:
-    if getattr(sys, "frozen", False) and hasattr(sys, "_MEIPASS"):
+    if is_frozen_app() and hasattr(sys, "_MEIPASS"):
         return Path(sys._MEIPASS)
     return Path(__file__).resolve().parents[3]
 
 
+def get_distribution_root() -> Path:
+    if is_frozen_app():
+        return Path(sys.executable).resolve().parent
+    return Path(__file__).resolve().parents[3]
+
+
 def get_local_catalog_path() -> Path:
-    root = get_application_root()
+    root = get_distribution_root()
     return root.joinpath(*LOCAL_CATALOG_RELATIVE_PATH)
 
 

@@ -12,15 +12,27 @@ from ..constants import (
     SOURCES_TEMPLATE_FILE_NAME,
 )
 from ..models import AppSettings, CatalogSource, ReleaseSource
-from ..utils.runtime import ensure_directory, get_application_root, get_user_config_dir
+from ..utils.runtime import (
+    ensure_directory,
+    get_application_root,
+    get_distribution_root,
+    get_user_config_dir,
+    is_frozen_app,
+)
 
 
 class SettingsService:
     def __init__(self) -> None:
         self.config_dir = ensure_directory(get_user_config_dir())
         self.settings_path = self.config_dir / SETTINGS_FILE_NAME
-        self.sources_path = self.config_dir / SOURCES_FILE_NAME
-        self.sources_template_path = get_application_root() / SOURCES_TEMPLATE_FILE_NAME
+        if is_frozen_app():
+            self.sources_dir = ensure_directory(get_distribution_root())
+            self.sources_path = self.sources_dir / SOURCES_FILE_NAME
+            self.sources_template_path = self.sources_dir / SOURCES_TEMPLATE_FILE_NAME
+        else:
+            self.sources_dir = self.config_dir
+            self.sources_path = self.sources_dir / SOURCES_FILE_NAME
+            self.sources_template_path = get_application_root() / SOURCES_TEMPLATE_FILE_NAME
 
     def load(self) -> AppSettings:
         self._ensure_defaults()
@@ -83,7 +95,7 @@ class SettingsService:
         current = self._load_json(self.sources_path, default=self._default_sources_payload())
         changed = False
         if "sources" not in current:
-            current["sources"] = []
+            current["sources"] = self._default_sources_payload()["sources"]
             changed = True
         if "release_sources" not in current:
             current["release_sources"] = self._default_sources_payload()["release_sources"]
@@ -106,13 +118,36 @@ class SettingsService:
     @staticmethod
     def _default_sources_payload() -> dict[str, object]:
         return {
-            "sources": [],
+            "sources": [
+                {
+                    "name": "GitHub Raw",
+                    "catalog_url": "https://raw.githubusercontent.com/magicskysword/LongYinModInstaller/master/mod_repository/mods.json",
+                    "enabled": True,
+                },
+                {
+                    "name": "jsDelivr 镜像",
+                    "catalog_url": "https://cdn.jsdelivr.net/gh/magicskysword/LongYinModInstaller@master/mod_repository/mods.json",
+                    "enabled": True,
+                },
+            ],
             "release_sources": [
                 {
-                    "name": "GitHub 镜像",
-                    "api_base": "<填写镜像 API 基址>",
-                    "download_base": "<填写镜像下载基址>",
-                    "enabled": False,
+                    "name": "GitHub 镜像 gh-proxy",
+                    "api_base": "https://gh-proxy.com/https://api.github.com",
+                    "download_base": "https://gh-proxy.com/https://github.com",
+                    "enabled": True
+                },
+                {
+                    "name": "GitHub 镜像 gh-proxy v6",
+                    "api_base": "https://v6.gh-proxy.org/https://api.github.com",
+                    "download_base": "https://v6.gh-proxy.org/https://github.com",
+                    "enabled": True
+                },
+                {
+                    "name": "GitHub 镜像 mirror.ghproxy",
+                    "api_base": "https://mirror.ghproxy.com/https://api.github.com",
+                    "download_base": "https://mirror.ghproxy.com/https://github.com",
+                    "enabled": True
                 },
                 {
                     "name": "GitHub 原址",

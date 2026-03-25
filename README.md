@@ -11,7 +11,15 @@
 - 安装动作会记录 manifest，卸载时按记录反向恢复
 - 根据配置安装 Mod，并列出当前 `Mods` 目录里已经安装的 DLL
 
-如果远程源未配置或不可用，程序会自动回退到仓库内置的本地 `mod_repository/mods.json`。
+默认远程仓库基址为 `https://github.com/magicskysword/LongYinModInstaller`，程序会优先尝试读取该仓库 `master` 分支上的 Raw / jsDelivr `mod_repository/mods.json`；如果远程源不可用，则自动回退到仓库内置的本地 `mod_repository/mods.json`。
+
+打包后的 `dist` 目录会额外包含这些与 `LongYinModInstaller.exe` 同级的文件：
+
+- `catalog_sources.json`
+- `catalog_sources.example.json`
+- `mod_repository/`
+
+其中 `catalog_sources.json` 是程序实际读取的镜像配置文件，本地回退仓库则来自同级目录下的 `mod_repository/mods.json`。
 
 ## 开发环境
 
@@ -33,7 +41,7 @@ python -m longyin_mod_installer
 
 ## Mod 仓库说明
 
-仓库列表文件位于 `mod_repository/mods.json`，当前已经放入两个本地示例 Mod：
+仓库列表文件位于 `mod_repository/mods.json`，当前已经放入两个 GitHub Release 测试 Mod：
 
 - `TheBookOfLong.dll`
 - `LongYinTalentTweaks.dll`
