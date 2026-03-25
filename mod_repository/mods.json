@@ -1,0 +1,37 @@
+{
+  "repository": {
+    "name": "LongYin Mod Repository",
+    "game_name": "龙胤立志传",
+    "game_app_id": 3202030,
+    "version": "2026.03.24",
+    "updated_at": "2026-03-24T21:40:00+08:00"
+  },
+  "mods": [
+    {
+      "id": "the-book-of-long",
+      "name": "The Book Of Long",
+      "version": "1.0",
+      "description": "提供配置界面、数据导出与配置表修改能力。",
+      "file_name": "TheBookOfLong.dll",
+      "install_to": "Mods",
+      "download": {
+        "type": "repo_release",
+        "repo": "magicskysword/TheBookOfLong",
+        "tag": "latest"
+      }
+    },
+    {
+      "id": "longyin-talent-tweaks",
+      "name": "LongYin Talent Tweaks",
+      "version": "1.0",
+      "description": "修改天赋点数、天赋上限。",
+      "file_name": "LongYinTalentTweaks.dll",
+      "install_to": "Mods",
+      "download": {
+        "type": "repo_release",
+        "repo": "magicskysword/LongYinTalentTweaks",
+        "tag": "latest"
+      }
+    }
+  ]
+}

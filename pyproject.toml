@@ -1,0 +1,34 @@
+[build-system]
+requires = ["setuptools>=69", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "longyin-mod-installer"
+version = "0.1.0"
+description = "龙胤立志传 Mod 安装器"
+readme = "README.md"
+requires-python = ">=3.13"
+dependencies = [
+  "customtkinter>=5.2.2",
+  "requests>=2.32.3",
+  "tkinterdnd2>=0.4.3",
+]
+
+[project.optional-dependencies]
+dev = [
+  "pyinstaller>=6.15.0",
+  "pytest>=8.3.5",
+]
+
+[project.scripts]
+longyin-mod-installer = "longyin_mod_installer.main:main"
+
+[tool.setuptools]
+package-dir = {"" = "src"}
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+pythonpath = ["src"]
+testpaths = ["tests"]

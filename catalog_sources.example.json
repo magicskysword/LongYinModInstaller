@@ -1,0 +1,28 @@
+{
+  "sources": [
+    {
+      "name": "GitHub Raw",
+      "catalog_url": "https://raw.githubusercontent.com/<你的用户名>/<你的仓库名>/main/mod_repository/mods.json",
+      "enabled": false
+    },
+    {
+      "name": "jsDelivr 镜像",
+      "catalog_url": "https://cdn.jsdelivr.net/gh/<你的用户名>/<你的仓库名>@main/mod_repository/mods.json",
+      "enabled": false
+    }
+  ],
+  "release_sources": [
+    {
+      "name": "GitHub 镜像",
+      "api_base": "<填写镜像 API 基址>",
+      "download_base": "<填写镜像下载基址>",
+      "enabled": false
+    },
+    {
+      "name": "GitHub 原址",
+      "api_base": "https://api.github.com",
+      "download_base": "https://github.com",
+      "enabled": true
+    }
+  ]
+}
