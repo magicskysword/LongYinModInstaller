@@ -3,7 +3,8 @@
 这是一个面向《龙胤立志传》的Mod安装器，使用 Python 构建，默认工作流如下：
 
 - 自动读取 Steam 库与游戏目录，目标 AppID 固定为 `3202030`
-- 自动把内置的 `MelonLoader.x64.zip` 解包到游戏目录
+- 自动把内置的 `MelonLoader.x64.zip` 解包到游戏目录，并把 `Dependencies.zip` 合并到 `MelonLoader/`
+- 支持卸载 MelonLoader，会删除 `MelonLoader/` 和 `version.dll`
 - 读取 Mod 仓库配置，从 GitHub Raw 或镜像站拉取 `mods.json`
 - 支持两种 Mod 下载来源：`RepoRelease` 和 `File`
 - `RepoRelease` 可配置 `latest` 或具体 tag，并按 GitHub Release 资产自动匹配 `dll/zip`

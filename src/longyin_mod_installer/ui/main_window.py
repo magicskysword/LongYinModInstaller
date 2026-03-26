@@ -170,6 +170,7 @@ class MainWindow(DnDCTk):
             ("手动选择", self._choose_game_directory, COLORS["btn_secondary"], COLORS["btn_secondary_hover"], COLORS["text"]),
             ("打开目录", self._open_game_directory, COLORS["btn_secondary"], COLORS["btn_secondary_hover"], COLORS["text"]),
             ("安装 MelonLoader", self._install_melonloader_async, COLORS["danger"], COLORS["danger_hover"], "#FFFFFF"),
+            ("卸载 MelonLoader", self._uninstall_melonloader_async, COLORS["btn_secondary"], COLORS["btn_secondary_hover"], COLORS["text"]),
         ]:
             b = ctk.CTkButton(
                 btn_row, text=text, command=cmd,
@@ -580,6 +581,22 @@ class MainWindow(DnDCTk):
     def _after_install_melonloader(self) -> None:
         self._refresh_status_labels()
         messagebox.showinfo("完成", "MelonLoader 已安装或修复完成。")
+
+    def _uninstall_melonloader_async(self) -> None:
+        try:
+            game_dir = self._require_game_directory()
+        except Exception as exc:
+            self._show_error("卸载 MelonLoader", exc)
+            return
+        self._run_task(
+            "卸载 MelonLoader",
+            lambda: self.melonloader_installer.uninstall(game_dir, log=self._thread_log),
+            lambda _: self._after_uninstall_melonloader(),
+        )
+
+    def _after_uninstall_melonloader(self) -> None:
+        self._refresh_status_labels()
+        messagebox.showinfo("完成", "MelonLoader 已卸载。")
 
     def _install_single_mod_async(self, mod: ModEntry) -> None:
         try:

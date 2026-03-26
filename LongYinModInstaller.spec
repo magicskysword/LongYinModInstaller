@@ -9,6 +9,7 @@ datas = collect_data_files("customtkinter")
 dnd_datas, dnd_binaries, dnd_hiddenimports = collect_all("tkinterdnd2")
 datas += [
     (str(root / "MelonLoader.x64.zip"), "."),
+    (str(root / "Dependencies.zip"), "."),
 ]
 datas += dnd_datas
 
