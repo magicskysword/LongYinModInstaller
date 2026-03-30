@@ -10,7 +10,7 @@
     {
       "id": "the-book-of-long",
       "name": "The Book Of Long",
-      "version": "1.0",
+      "version": "1.1",
       "description": "提供配置界面、数据导出与配置表修改能力。",
       "file_name": "TheBookOfLong.dll",
       "install_to": "Mods",
