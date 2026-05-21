@@ -38,6 +38,12 @@ python -m longyin_mod_installer
 .\build.ps1
 ```
 
+打包前会从默认游戏目录 `E:\SteamLibrary\steamapps\common\LongYinLiZhiZhuan\MelonLoader\Dependencies` 重新生成 `Dependencies.zip`，随后由 PyInstaller 打进安装器。游戏目录不同时可以显式传入：
+
+```powershell
+.\build.ps1 -GameDirectory "D:\SteamLibrary\steamapps\common\LongYinLiZhiZhuan"
+```
+
 打包结果默认输出到 `dist\LongYinModInstaller.exe`。
 
 ## Mod 仓库说明
